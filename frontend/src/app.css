@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@font-face {
+  font-style: normal;
+  font-kerning: normal;
+  font-feature-settings: "salt" 1;
+}
+
+@font-face {
+  font-style: italic;
+  font-kerning: normal;
+  font-feature-settings: "salt" 1;
+}
+
+body {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+  -webkit-font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+  font-feature-settings: "liga" 1, "kern" 1, "calt" 1;
+  background-color: #fff;
+  color: #000;
+}
+
+@media print {
+  html,
+  body {
+    size: 3.5in 5.5in;
+    margin: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  body > div {
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-page {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-wrapper {
+    min-height: 0 !important;
+    display: block !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+  }
+
+  .print-card {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box;
+  }
+}

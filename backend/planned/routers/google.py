@@ -1,0 +1,116 @@
+import secrets
+from datetime import datetime, timedelta
+
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import RedirectResponse
+from google.auth.credentials import Credentials as GoogleCredentials
+from googleapiclient.discovery import build
+
+from planned.objects import AuthToken, Calendar
+from planned.repositories import auth_token_repo, calendar_repo
+from planned.gateways.google import get_flow
+
+# Auth state storage (in memory for simplicity, use a database in production)
+oauth_states = {}
+
+router = APIRouter()
+
+
+@router.get("/login")
+async def google_login():
+    state = secrets.token_urlsafe(16)
+    authorization_url, state = get_flow("login").authorization_url(
+        access_type="offline",
+        include_granted_scopes="true",
+        state=state,
+        prompt="consent",
+    )
+
+    # Store state for validation on callback
+    oauth_states[state] = {
+        "expiry": datetime.now() + timedelta(minutes=10),
+        "action": "login",
+    }
+
+    return RedirectResponse(authorization_url)
+
+
+def verify_state(
+    state: str,
+    expected_action: str,
+) -> bool:
+    """
+    Verify the state parameter and check if it matches the expected action.
+    """
+
+    if state not in oauth_states:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid state parameter",
+        )
+
+    state_data = oauth_states[state]
+    if datetime.now() > state_data["expiry"]:
+        del oauth_states[state]
+        raise HTTPException(
+            status_code=400,
+            detail="State parameter expired",
+        )
+    elif state_data["action"] != expected_action:
+        del oauth_states[state]
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid action parameter",
+        )
+
+    return True
+
+
+@router.get("/callback/login")
+async def google_login_callback(
+    request: Request,
+    state: str,
+    code: str,
+):
+    if not code or not verify_state(state, "login"):
+        raise HTTPException(
+            status_code=400,
+            detail="Missing required parameters",
+        )
+
+    flow = get_flow("login")
+    flow.fetch_token(code=code)
+
+    auth_token: AuthToken = await auth_token_repo.put(
+        AuthToken(
+            client_id=flow.credentials.client_id,
+            client_secret=flow.credentials.client_secret,
+            expires_at=flow.credentials.expiry,
+            platform="google",
+            refresh_token=flow.credentials.refresh_token,
+            scopes=flow.credentials.scopes,
+            token=flow.credentials.token,
+            token_uri=flow.credentials.token_uri,
+        ),
+    )
+
+    request.session["auth_token_uuid"] = str(auth_token.uuid)
+
+    service = build(
+        "calendar",
+        "v3",
+        credentials=flow.credentials,
+    )
+    calendar_list = service.calendarList().list().execute()
+
+    for calendar in calendar_list.get("items", []):
+        await calendar_repo.put(
+            Calendar(
+                name=calendar["summary"],
+                platform="google",
+                platform_id=calendar["id"],
+                auth_token_uuid=auth_token.uuid,
+            ),
+        )
+
+    return RedirectResponse(url="/app")

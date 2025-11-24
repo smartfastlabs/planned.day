@@ -1,0 +1,33 @@
+{
+  "name": "Todd's Daily Planner",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start",
+    "serve": "vinxi dev --port 443 --host master-bedroom.local"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "0.15.3",
+    "@solidjs/start": "^1.2.0",
+    "solid-fontawesome": "^0.2.1",
+    "solid-heroicons": "^3.2.4",
+    "solid-js": "^1.9.9",
+    "vinxi": "^0.5.8",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.12",
+    "tailwindcss": "^4.1.12",
+    "vite-plugin-pwa": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "overrides": {
+    "@solidjs/router": "0.15.3"
+  }
+}

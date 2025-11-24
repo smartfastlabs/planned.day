@@ -1,0 +1,9 @@
+.credentials.json
+data/
+.DS_Store
+node_modules
+.vinxi
+/models
+*.pyc
+.env
+.certs
