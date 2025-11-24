@@ -1,18 +1,37 @@
+import datetime
 from .base import BaseService
-from datetime import date
 
+from planned import objects
 from planned.utils.dates import get_current_date
 from planned.objects import RoutineInstance, Routine
-from planned.repositories import routine_repo
+from planned.repositories import routine_repo, routine_instance_repo
 
+
+def is_routine_active(routine: objects.Routine, date:  datetime.date) -> bool:
+    if routine.schedule_days:
+        if date.weekday() not in routine.schedule_days:
+            return False
+
+    return True
 
 class RoutineService(BaseService):
-    async def get_instances(self, day: date | None = None) -> list[RoutineInstance]:
+    async def schedule(self, date: datetime.date | None = None) -> list[RoutineInstance]:
         if date is None:
             date = get_current_date()
 
-        routines: list[Routine] = await routine_repo.search()
-        instances: list[RoutineInstance] = await routine_repo.get_instances(date)
+        await routine_instance_repo.delete_by_date(date)
+        result: list[RoutineInstance] = []
 
-    async def create_instances(self, day: date | None = None) -> list[RoutineInstance]:
-        pass
+        for routine in await routine_repo.search():
+            if is_routine_active(routine, date):
+                result.append(
+                    objects.RoutineInstance(
+                        routine=routine,
+                        date=date,
+                    )
+                )
+
+        return result
+
+
+routine_svc = RoutineService()

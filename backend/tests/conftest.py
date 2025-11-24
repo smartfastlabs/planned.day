@@ -1,6 +1,8 @@
 import pytest
 
 from planned import objects
+from planned.utils.dates import get_current_date
 
-def test_event():
-    return objects.Event()
+@pytest.fixture
+def today():
+    return get_current_date()

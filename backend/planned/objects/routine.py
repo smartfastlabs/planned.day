@@ -33,14 +33,14 @@ class Category(str, Enum):
     CHORE = "chore"
 
 
-class DayOfWeek(str, Enum):
-    MONDAY = "MONDAY"
-    TUESDAY = "TUESDAY"
-    WEDNESDAY = "WEDNESDAY"
-    THURSDAY = "THURSDAY"
-    FRIDAY = "FRIDAY"
-    SATURDAY = "SATURDAY"
-    SUNDAY = "SUNDAY"
+class DayOfWeek(int, Enum):
+    MONDAY = 0
+    TUESDAY = 1
+    WEDNESDAY = 2
+    THURSDAY = 3
+    FRIDAY = 4
+    SATURDAY = 5
+    SUNDAY = 6
 
 
 class Routine(BaseObject):
@@ -60,6 +60,7 @@ class Routine(BaseObject):
     schedule_days: Optional[List[DayOfWeek]] = Field(default=None, alias="scheduleDays")
 
 
+
 class RoutineInstance(BaseObject):
     routine: Routine
     date: date
@@ -69,3 +70,4 @@ class RoutineInstance(BaseObject):
     @property
     def id(self):
         return self.routine.id
+

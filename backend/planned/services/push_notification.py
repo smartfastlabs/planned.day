@@ -46,3 +46,5 @@ class PushNotificationService(BaseService):
                 raise exceptions.PushNotificationException(
                     f"Failed to send push notification: {response.status} {response.reason}"
                 )
+
+push_svc = PushNotificationService()

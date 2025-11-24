@@ -1,8 +1,5 @@
-from .auth import AuthService
-from .calendar import CalendarService
-from .push_notification import PushNotificationService
-from .routine import RoutineService
-
-auth_svc = AuthService()
-calendar_svc = CalendarService()
-push_svc = PushNotificationService()
+from .auth import AuthService, auth_svc
+from .calendar import CalendarService, calendar_svc
+from .push_notification import PushNotificationService, push_svc
+from .routine import RoutineService, routine_svc
+from .planning import PlanningService, planning_svc

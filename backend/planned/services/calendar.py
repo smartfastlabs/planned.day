@@ -1,5 +1,4 @@
-import asyncio
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 
 from planned.objects import Calendar, Event
 from planned.gateways import google
@@ -8,7 +7,8 @@ from planned.repositories import calendar_repo, auth_token_repo, event_repo
 
 class CalendarService:
     async def sync_google(
-        self, calendar: Calendar, lookback: datetime
+        self, calendar: Calendar, 
+        lookback: datetime,
     ) -> tuple[list[Event], list[Event]]:
         events, deleted_events = [], []
 
@@ -24,6 +24,7 @@ class CalendarService:
                 events.append(event)
 
         return events, deleted_events
+
 
     async def sync(self, calendar: Calendar) -> list[Event]:
         lookback: datetime = datetime.now(timezone.utc) - timedelta(days=2)
@@ -52,3 +53,5 @@ class CalendarService:
                 await event_repo.put(event)
             for event in deleted_events:
                 await event_repo.delete(event.id)
+
+calendar_svc = CalendarService()

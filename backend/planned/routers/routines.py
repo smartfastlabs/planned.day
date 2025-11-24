@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 
+from planned.utils.dates import get_current_date
 from planned.objects import Routine, RoutineInstance
-from planned.repositories import routine_repo
+from planned.repositories import routine_repo, routine_instance_repo
 
 router = APIRouter()
 
@@ -11,6 +12,8 @@ async def list_routines() -> list[Routine]:
     return await routine_repo.search()
 
 
-@router.get("/today")
+@router.get("/instances/today")
 async def list_todays_routine_instances() -> list[RoutineInstance]:
-    return await routine_service.get_instances()
+    return await routine_instance_repo.search(
+        get_current_date(),
+    )
