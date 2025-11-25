@@ -1,6 +1,6 @@
-from typing import cast
 import secrets
 from datetime import datetime, timedelta
+from typing import cast
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import RedirectResponse
@@ -50,7 +50,7 @@ def verify_state(
         )
 
     state_data = oauth_states[state]
-    if datetime.now() > cast(datetime, state_data["expiry"]):
+    if datetime.now() > cast("datetime", state_data["expiry"]):
         del oauth_states[state]
         raise HTTPException(
             status_code=400,

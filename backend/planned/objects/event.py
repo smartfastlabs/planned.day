@@ -8,11 +8,11 @@ from .base import BaseObject
 
 class Event(BaseObject):
     name: str
-    calendar_id: str 
-    platform_id: str 
+    calendar_id: str
+    platform_id: str
     platform: str
     status: str
-    starts_at: datetime 
+    starts_at: datetime
     ends_at: datetime | None = None
     created_at: datetime = Field(
         default_factory=lambda: datetime.now(UTC)

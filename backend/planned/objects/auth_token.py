@@ -3,7 +3,7 @@ from datetime import UTC, datetime
 from uuid import UUID
 
 from google.oauth2.credentials import Credentials
-from pydantic import Field, ConfigDict
+from pydantic import ConfigDict, Field
 
 from .base import BaseObject
 

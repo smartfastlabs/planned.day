@@ -3,6 +3,7 @@ from typing import TypeVar
 
 import aiofiles
 import aiofiles.os
+from loguru import logger
 
 from planned.objects.base import BaseObject
 
@@ -44,7 +45,7 @@ async def read_directory(directory: str, model: type[T]) -> list[T]:
             )
             objects.append(obj)
         except Exception as e:
-            print(f"Error loading object from {full_path}: {e}")
+            logger.info(f"Error loading object from {full_path}: {e}")
             continue
 
     return objects

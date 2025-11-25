@@ -1,8 +1,6 @@
 from datetime import date, datetime, time
 from enum import Enum
 
-from pydantic import Field
-
 from .base import BaseObject
 
 

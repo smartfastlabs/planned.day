@@ -1,5 +1,7 @@
 import datetime
 
+from loguru import logger
+
 from planned import objects
 from planned.objects import RoutineInstance, RoutineInstanceStatus
 from planned.repositories import routine_instance_repo, routine_repo
@@ -24,7 +26,7 @@ class RoutineService(BaseService):
         result: list[RoutineInstance] = []
 
         for routine in await routine_repo.search():
-            print(routine)
+            logger.info(routine)
             if is_routine_active(routine, date):
                 result.append(
                     objects.RoutineInstance(

@@ -1,5 +1,7 @@
 from datetime import UTC, datetime, timedelta
 
+from loguru import logger
+
 from planned.gateways import google
 from planned.objects import Calendar, Event
 from planned.repositories import auth_token_repo, calendar_repo, event_repo
@@ -39,7 +41,7 @@ class CalendarService:
                     lookback=lookback,
                 )
         except Exception as e:
-            print(f"Error syncing calendar: {e}")
+            logger.info(f"Error syncing calendar: {e}")
             raise
 
         raise NotImplementedError(

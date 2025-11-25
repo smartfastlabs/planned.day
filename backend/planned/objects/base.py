@@ -1,4 +1,4 @@
-from typing import Self, Any
+from typing import Any, Self
 
 import pydantic
 

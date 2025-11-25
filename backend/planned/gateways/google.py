@@ -2,6 +2,7 @@ from datetime import UTC, date, datetime, timedelta
 
 from gcsa.google_calendar import GoogleCalendar
 from google_auth_oauthlib.flow import Flow
+from loguru import logger
 
 from planned.objects import Calendar, Event
 from planned.objects.auth_token import AuthToken
@@ -61,26 +62,26 @@ def load_calendar_events(
     token: AuthToken,
 ) -> list[Event]:
     events: list[Event] = []
-    print(f"Loading events for calendar {calendar.name}...")
+    logger.info(f"Loading events for calendar {calendar.name}...")
     for event in get_google_calendar(calendar, token).get_events(
         single_events=True,
         showDeleted=False,
         time_max=datetime.now(UTC) + timedelta(days=30),
     ):
         if is_after(event.end, event.updated):
-            print(f"It looks like the event `{event.summary}` has already happened")
+            logger.info(f"It looks like the event `{event.summary}` has already happened")
             continue
 
         if event.other.get("status") == "cancelled":
-            print(f"It looks like the event `{event.summary}` has been cancelled")
+            logger.info(f"It looks like the event `{event.summary}` has been cancelled")
 
         else:
-            print(f"Loaded event {event.id}: {event.summary}")
+            logger.info(f"Loaded event {event.id}: {event.summary}")
 
         try:
             events.append(Event.from_google(calendar.id, event))
         except Exception as e:
-            print(f"Error converting event {event.id}: {e}")
+            logger.info(f"Error converting event {event.id}: {e}")
             continue
 
     return events

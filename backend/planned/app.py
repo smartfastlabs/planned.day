@@ -1,9 +1,12 @@
 import asyncio
 import sys
-import traceback
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Never
+
+from loguru import logger
+
+logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>")
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,26 +22,25 @@ async def init_lifespan(app: FastAPI) -> AsyncIterator[Never]:
     Lifespan context manager for FastAPI application.
     """
 
-    print("Starting up...")
+    logger.info("Starting up...")
 
     async def run() -> None:
         while True:
             try:
-                print("Syncing events...")
+                logger.info("Syncing events...")
                 await calendar_svc.sync_all()
             except Exception as e:
-                print(f"Error during sync: {e}")
-                traceback.print_exc(file=sys.stderr)
+                logger.info(f"Error during sync: {e}")
             await asyncio.sleep(60 * 10)
 
     try:
         task = asyncio.create_task(run())
     except Exception as e:
-        print(f"Error during startup: {e}")
+        logger.info(f"Error during startup: {e}")
         breakpoint()
 
     yield  # type: ignore
-    print("Shutting down...")
+    logger.info("Shutting down...")
     task.cancel()
 
 
