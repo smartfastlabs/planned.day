@@ -1,0 +1,10 @@
+{
+  "id": "am-dog-walk",
+  "name": "AM Dog Walk",
+  "description": "Walk the dog before 9am.",
+  "timing_type": "DEADLINE",
+  "frequency": "DAILY",
+  "category": "pet",
+  "available_time": "07:30",
+  "end_time": "09:00"
+}

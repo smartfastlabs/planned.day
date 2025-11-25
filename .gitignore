@@ -1,5 +1,6 @@
 .credentials.json
-data/
+/data/
+!/tests/data/
 .DS_Store
 node_modules
 .vinxi
