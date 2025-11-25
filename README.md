@@ -1,5 +1,8 @@
 # Planned.day
 
+![Tests](https://github.com/smartfastlabs/planned.day/actions/workflows/ci.yml/badge.svg?branch=main)
+
+
 #### tldr: One single source of truth for what I WANT to accomplish to have the best version of that ONE DAY.
 
 #### NOTE: Not a todo APP, planned.day does not worry about: the week, month, or year; there are plenty of apps for that ;).
