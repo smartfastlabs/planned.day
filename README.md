@@ -55,25 +55,11 @@
 # Multiple Interfaces
 
 #### Every system I have tried fails here, because they want to lock you into their platform :shrug:
-
-1. Raspberry Pi
-   - Touch Screen
-   - Speaker
-   - Microphone
-   - Home Assistant
-   - runs all the code
-2. PWA
-   - Chat
-   - App View
-3. Pen & Paper
-
-   - You just can't beat it.
-
-4. Kiosk -- rpi, runs planned.day, speaker/microphone, touch screen.
+1. Kiosk -- rpi, runs planned.day, speaker/microphone, touch screen.
    TODO: Add Screenshots
-5. PWA -- Chat, app view, push notifications
+2. PWA -- Chat, app view, push notifications
    TODO: Add Screenshots
-6. Pen & Paper -- You just can't beat it.
+3. Pen & Paper -- You just can't beat it.
    TODO: Add Screenshots
 
 # Implementation
