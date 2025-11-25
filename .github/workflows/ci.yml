@@ -50,11 +50,9 @@ jobs:
         run: poetry run mypy planned
 
       - name: Run pytest
-        run: poetry run pytest --cov=planned--cov-report=xml
+        run: poetry run pytest --cov --cov-branch --cov-report=xml
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
+      - name: Upload coverage reports to Codecov
+          uses: codecov/codecov-action@v5
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
