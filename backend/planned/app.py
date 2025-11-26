@@ -6,8 +6,11 @@ from typing import Never
 
 from loguru import logger
 
+logger.remove()
 logger.add(
-    sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>"
+    sys.stdout,
+    colorize=True,
+    format="<green>{time}</green> <level>{message}</level>",
 )
 
 from fastapi import FastAPI
@@ -24,25 +27,9 @@ async def init_lifespan(app: FastAPI) -> AsyncIterator[Never]:
     Lifespan context manager for FastAPI application.
     """
 
-    logger.info("Starting up...")
-
-    async def run() -> None:
-        while True:
-            try:
-                logger.info("Syncing events...")
-                await calendar_svc.sync_all()
-            except Exception as e:
-                logger.info(f"Error during sync: {e}")
-            await asyncio.sleep(60 * 10)
-
-    try:
-        task = asyncio.create_task(run())
-    except Exception as e:
-        logger.info(f"Error during startup: {e}")
-        breakpoint()
-
+    task = asyncio.create_task(calendar_svc.run())
     yield  # type: ignore
-    logger.info("Shutting down...")
+    calendar_svc.stop()
     task.cancel()
 
 
