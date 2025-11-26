@@ -1,7 +1,7 @@
 # Planned.day
 
 ![Tests](https://github.com/smartfastlabs/planned.day/actions/workflows/ci.yml/badge.svg?branch=main)
-
+[![codecov](https://codecov.io/github/smartfastlabs/planned.day/graph/badge.svg?token=LKE5MI43G4)](https://codecov.io/github/smartfastlabs/planned.day)
 
 #### tldr: One single source of truth for what I WANT to accomplish to have the best version of that ONE DAY.
 
