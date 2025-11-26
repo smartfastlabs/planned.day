@@ -6,7 +6,9 @@ from typing import Never
 
 from loguru import logger
 
-logger.add(sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>")
+logger.add(
+    sys.stdout, colorize=True, format="<green>{time}</green> <level>{message}</level>"
+)
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

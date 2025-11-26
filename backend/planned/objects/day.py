@@ -1,4 +1,3 @@
-
 from datetime import date as dt_date
 
 from .base import BaseObject

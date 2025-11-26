@@ -14,14 +14,10 @@ class Event(BaseObject):
     status: str
     starts_at: datetime
     ends_at: datetime | None = None
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(UTC)
-    )
-    updated_at: datetime = Field(
-        default_factory=lambda: datetime.now(UTC)
-    )
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
-    @computed_field # mypy: ignore
+    @computed_field  # mypy: ignore
     @property
     def date(self) -> dt_date:
         return self.starts_at.date()
@@ -49,11 +45,7 @@ class Event(BaseObject):
             else google_event.end,
             platform_id=google_event.id or "NA",
             platform="google",
-            created_at=google_event.created.astimezone(UTC).replace(
-                tzinfo=None
-            ),
-            updated_at=google_event.updated.astimezone(UTC).replace(
-                tzinfo=None
-            ),
+            created_at=google_event.created.astimezone(UTC).replace(tzinfo=None),
+            updated_at=google_event.updated.astimezone(UTC).replace(tzinfo=None),
         )
         return event

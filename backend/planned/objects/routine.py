@@ -58,7 +58,6 @@ class Routine(BaseObject):
     schedule_days: list[DayOfWeek] | None = None
 
 
-
 class RoutineInstance(BaseObject):
     routine: Routine
     date: date
@@ -68,4 +67,3 @@ class RoutineInstance(BaseObject):
     @property
     def id(self) -> str:
         return self.routine.id
-

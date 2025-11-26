@@ -1,6 +1,5 @@
 import os
-
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -13,10 +12,10 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
     DATA_PATH: str = "../data"
 
-    class Config:
+    model_config = SettingsConfigDict(
         # Default to ".env", but allow overriding with ENV_FILE
-        env_file = os.getenv("ENV_FILE", ".env")
-        case_sensitive = True
-
+        env_file=os.getenv("ENV_FILE", ".env"),
+        case_sensitive=True,
+    )
 
 settings = Settings()

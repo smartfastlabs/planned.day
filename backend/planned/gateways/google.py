@@ -69,7 +69,9 @@ def load_calendar_events(
         time_max=datetime.now(UTC) + timedelta(days=30),
     ):
         if is_after(event.end, event.updated):
-            logger.info(f"It looks like the event `{event.summary}` has already happened")
+            logger.info(
+                f"It looks like the event `{event.summary}` has already happened"
+            )
             continue
 
         if event.other.get("status") == "cancelled":

@@ -131,6 +131,9 @@ testpaths = ["tests"]
 [tool.coverage.run]
 branch = true
 source = ["planned"]
+omit = [
+    "planned/scripts/*",
+]
 
 [tool.coverage.report]
 exclude_lines = [

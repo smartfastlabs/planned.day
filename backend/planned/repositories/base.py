@@ -79,4 +79,6 @@ class BaseRepository(Generic[ObjectType]):
         return f"{self._prefix}/{temp}"
 
     def _get_file_path(self, temp: str | ObjectType) -> str:
-        return os.path.abspath(f"{settings.DATA_PATH}/{self._get_object_path(temp)}.json")
+        return os.path.abspath(
+            f"{settings.DATA_PATH}/{self._get_object_path(temp)}.json"
+        )

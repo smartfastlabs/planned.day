@@ -9,7 +9,8 @@ from planned.repositories import auth_token_repo, calendar_repo, event_repo
 
 class CalendarService:
     async def sync_google(
-        self, calendar: Calendar,
+        self,
+        calendar: Calendar,
         lookback: datetime,
     ) -> tuple[list[Event], list[Event]]:
         events, deleted_events = [], []
@@ -26,7 +27,6 @@ class CalendarService:
                 events.append(event)
 
         return events, deleted_events
-
 
     async def sync(self, calendar: Calendar) -> tuple[list[Event], list[Event]]:
         lookback: datetime = datetime.now(UTC) - timedelta(days=2)
@@ -55,5 +55,6 @@ class CalendarService:
                 await event_repo.put(event)
             for event in deleted_events:
                 await event_repo.delete(event.id)
+
 
 calendar_svc = CalendarService()

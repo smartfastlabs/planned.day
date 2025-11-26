@@ -24,9 +24,7 @@ class AuthToken(BaseObject):
     scopes: list | None = None
     expires_at: datetime | None = None
     uuid: UUID = Field(default_factory=uuid.uuid4)
-    created_at: datetime = Field(
-        default_factory=lambda: datetime.now(UTC)
-    )
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
     def google_credentials(self) -> Credentials:
         """

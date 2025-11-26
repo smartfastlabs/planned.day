@@ -43,7 +43,9 @@ class PushNotificationService(BaseService):
 
             if not response.ok:
                 raise exceptions.PushNotificationException(
-                    f"Failed to send push notification: {response.status} {response.reason}", 504,
+                    f"Failed to send push notification: {response.status} {response.reason}",
+                    504,
                 )
+
 
 push_svc = PushNotificationService()

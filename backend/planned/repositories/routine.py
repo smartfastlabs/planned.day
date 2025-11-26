@@ -1,4 +1,3 @@
-
 from planned.objects.routine import Routine
 
 from .base import BaseRepository
