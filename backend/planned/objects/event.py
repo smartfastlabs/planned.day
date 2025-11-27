@@ -25,7 +25,7 @@ class Event(BaseObject):
     @computed_field
     @property
     def guid(self) -> str:
-        return f"event:{self.platform}-{self.platform_id}"
+        return f"{self.platform}-{self.platform_id}"
 
     @classmethod
     def from_google(cls, calendar_id: str, google_event: GoogleEvent) -> "Event":

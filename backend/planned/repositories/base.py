@@ -1,6 +1,8 @@
+import asyncio
 import contextlib
 import datetime
 import os
+import shutil
 from pathlib import Path
 from typing import Generic, TypeVar
 from uuid import UUID
@@ -16,6 +18,14 @@ ObjectType = TypeVar(
     "ObjectType",
     bound=BaseObject,
 )
+
+
+async def delete_dir(path: str) -> None:
+    abs_path = os.path.abspath(path)
+
+    # swallow "doesn't exist" errors
+    with contextlib.suppress(FileNotFoundError):
+        await asyncio.to_thread(shutil.rmtree, abs_path)
 
 
 class BaseRepository(Generic[ObjectType]):
@@ -60,13 +70,15 @@ class BaseRepository(Generic[ObjectType]):
 
         raise Exception(f"You can't search {self.Object.__name__}s by date!")
 
-    async def delete(self, temp: str | UUID) -> None:
+    async def delete(self, temp: str | UUID | ObjectType) -> None:
         with contextlib.suppress(FileExistsError):
-            await aiofiles.os.remove(self._get_file_path(str(temp)))
+            if isinstance(temp, UUID):
+                temp = str(temp)
+            await aiofiles.os.remove(self._get_file_path(temp))
 
     async def delete_by_date(self, date: datetime.date) -> None:
         with contextlib.suppress(FileNotFoundError):
-            await aiofiles.os.rmdir(
+            await delete_dir(
                 os.path.abspath(f"{settings.DATA_PATH}/{self._prefix}/{date}"),
             )
 

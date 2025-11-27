@@ -134,6 +134,7 @@ branch = true
 source = ["planned"]
 omit = [
     "planned/scripts/*",
+    "planned/app.py",
 ]
 
 [tool.coverage.report]

@@ -17,6 +17,6 @@ async def test_get_today(test_client, test_date):
             "created_at": "2025-11-05T11:15:00Z",
             "updated_at": "2025-11-05T11:15:00Z",
             "date": "2025-11-27",
-            "guid": "event:google_calendar-gcal-family-004",
+            "guid": "google_calendar-gcal-family-004",
         }
     ]
