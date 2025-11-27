@@ -1,11 +1,8 @@
-import { Router } from "@solidjs/router";
-import { TaskProvider } from "~/providers/tasks";
+import { Router, Route } from "@solidjs/router";
 import { Title, Meta, MetaProvider } from "@solidjs/meta";
-import { clientOnly } from "@solidjs/start";
-import { FileRoutes } from "@solidjs/start/router";
 import { Component, Suspense } from "solid-js";
 import { FontAwesomeIcon } from "solid-fontawesome";
-import "./app.css";
+import "./index.css";
 
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -18,6 +15,8 @@ import {
   faFaceSmileWink,
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
+
+import Home from "./components/pages/home";
 
 library.add(
   faGear,
@@ -33,6 +32,7 @@ config.autoAddCss = false;
 
 import { onMount } from "solid-js";
 import { NotificationProvider } from "./providers/notifications";
+import { TaskProvider } from "./providers/tasks";
 
 export default function App() {
   onMount(() => {
@@ -112,7 +112,7 @@ export default function App() {
         </NotificationProvider>
       )}
     >
-      <FileRoutes />
+      <Route path="/" component={Home} />
     </Router>
   );
 }

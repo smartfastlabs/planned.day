@@ -1,8 +1,8 @@
 import { Component, Show, createMemo, createSignal } from "solid-js";
-import type { Task } from "~/types/tasks";
-import { getTime } from "~/utils/dates";
-import TimeBadge from "~/components/shared/timeBadge";
-import TaskStatusBadge from "~/components/tasks/statusBadge";
+import type { Task } from "../../types/tasks";
+import { getTime } from "../../utils/dates";
+import TimeBadge from "../shared/timeBadge";
+import TaskStatusBadge from "./statusBadge";
 
 interface TaskCardProps {
   task: Task;

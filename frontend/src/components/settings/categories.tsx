@@ -1,5 +1,5 @@
-import MultiSelect from "~/components/shared/multiSelect";
-import Modal from "~/components/shared/modal";
+import MultiSelect from "./shared/multiSelect";
+import Modal from "./shared/modal";
 import { createSignal } from "solid-js";
 import { clock } from "solid-heroicons/outline";
 

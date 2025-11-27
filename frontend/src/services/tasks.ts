@@ -1,8 +1,9 @@
-import { TaskStatusType, Task, TaskStatus } from "~/types/tasks";
+import { TaskStatusType, Task, TaskStatus } from "..types/tasks";
 
-import { exampleTasks } from "~/data/dailyTasks";
-import { TaskStorage } from "~/utils/localStorage/tasks";
-import { getDateString, getTime, getDayOfWeek } from "~/utils/dates";
+import { TaskStorage } from "../utils/localStorage/tasks";
+import { getDateString, getTime, getDayOfWeek } from "../utils/dates";
+
+import { exampleTasks } from "../data/dailyTasks";
 
 const TaskService = {
   getTasksForDate: (date?: string | null) => {

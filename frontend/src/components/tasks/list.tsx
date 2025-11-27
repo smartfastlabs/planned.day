@@ -1,7 +1,7 @@
 import { For, onMount, createSignal, createEffect, Show } from "solid-js";
-import { getTime } from "~/utils/dates";
-import { TaskCard } from "~/components/tasks/card";
-import { useTaskManager } from "~/providers/tasks";
+import { getTime } from "../../utils/dates";
+import { TaskCard } from "./card";
+import { useTaskManager } from "../../providers/tasks";
 
 type Task = {
   id: string;

@@ -1,13 +1,12 @@
-import { Task } from "~/types/tasks";
 import { getTime } from "./dates";
 
-export function groupTasks(tasks: Task[]) {
+export function groupTasks(tasks: Any[]) {
   // remove all items with availableTime in the future
   const result = {
-    punted: [] as Task[],
-    pending: [] as Task[],
-    missed: [] as Task[],
-    completed: [] as Task[],
+    punted: [] as Any[],
+    pending: [] as Any[],
+    missed: [] as Any[],
+    completed: [] as Any[],
   };
 
   for (const task of tasks) {

@@ -5,19 +5,18 @@ import {
   useContext,
   onMount,
 } from "solid-js";
-import TaskService from "~/services/tasks";
-import { Task, TaskStatus, TaskStatusType } from "~/types/tasks";
+import TaskService from "../services/tasks";
 
 const TaskContext = createContext();
 
 export function TaskProvider(props) {
-  const [tasks, taskManager] = createResource<Task[]>(() => []);
+  const [tasks, taskManager] = createResource<Any[]>(() => []);
 
   onMount(async () => {
     taskManager.mutate(TaskService.getTasksForDate());
   });
 
-  const updateTask = async (input: Task) => {
+  const updateTask = async (input: Any) => {
     taskManager.mutate((items) =>
       items.map((i) =>
         i.definition.id !== input.definition.id ? i : { ...i, ...input }
@@ -26,7 +25,7 @@ export function TaskProvider(props) {
     return input;
   };
 
-  const setTaskStatus = async (task: Task, status: TaskStatusType) => {
+  const setTaskStatus = async (task: Any, status: Any) => {
     await updateTask(TaskService.setTaskStatus(task, status));
   };
 
