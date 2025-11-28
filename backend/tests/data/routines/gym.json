@@ -4,7 +4,8 @@
   "description": "Go to the gym at 6:15am on Mon/Wed/Fri.",
   "timing_type": "FIXED_TIME",
   "frequency": "CUSTOM_WEEKLY",
-  "category": "health",
+  "category": "HEALTH",
+  "type": "ACTIVITY",
   "start_time": "06:15",
   "schedule_days": [0, 3]
 }

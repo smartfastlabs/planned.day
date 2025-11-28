@@ -5,4 +5,5 @@ from .day import Day
 from .event import Event
 from .push_subscription import PushSubscription
 from .routine import Routine
-from .task import Task, TaskStatus
+from .task import Task, TaskStatus, TaskType
+from .day import Day

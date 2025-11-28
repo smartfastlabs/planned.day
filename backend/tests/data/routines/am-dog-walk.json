@@ -3,8 +3,9 @@
   "name": "AM Dog Walk",
   "description": "Walk the dog before 9am.",
   "timing_type": "DEADLINE",
+  "type": "CHORE",
   "frequency": "DAILY",
-  "category": "pet",
+  "category": "PET",
   "available_time": "07:30",
   "end_time": "09:00"
 }

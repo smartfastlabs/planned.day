@@ -1,9 +1,8 @@
-
 from datetime import date, datetime
 from enum import Enum
 
 from .base import BaseObject
-from .routine import Routine
+from .routine import Routine, TaskType
 
 
 class TaskStatus(str, Enum):
@@ -16,6 +15,7 @@ class TaskStatus(str, Enum):
 class Task(BaseObject):
     routine: Routine
     date: date
+    type: TaskType
     status: TaskStatus
     completed_at: datetime | None = None
 
