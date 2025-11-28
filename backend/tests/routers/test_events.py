@@ -1,4 +1,5 @@
 import pytest
+
 from planned.utils.dates import get_current_date
 
 

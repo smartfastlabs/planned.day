@@ -1,4 +1,5 @@
 import pytest
+
 from planned.repositories import event_repo
 
 

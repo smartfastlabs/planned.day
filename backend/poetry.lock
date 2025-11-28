@@ -828,6 +828,17 @@ dnspython = ">=2.0.0"
 idna = ">=2.0.0"
 
 [[package]]
+name = "equals"
+version = "3.1.2"
+description = "Fuzzy Mock objects for testing"
+optional = false
+python-versions = "<4.0,>=3.9"
+files = [
+    {file = "equals-3.1.2-py3-none-any.whl", hash = "sha256:0142bf73dd89ae380800d3d2a957c0c44b834970be1794a43eeffe7740330835"},
+    {file = "equals-3.1.2.tar.gz", hash = "sha256:fdbcf1a3896e859a54c65e36a7c71b4ff851d31654d98019a8e35db23b7d6a86"},
+]
+
+[[package]]
 name = "fastapi"
 version = "0.122.0"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
@@ -3277,4 +3288,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.13"
-content-hash = "23ace50545a852133436d7386814202505129090ae44adc7ab7a27096b8e0182"
+content-hash = "a7699dbc38650823a1eccf66f758518e611a2cb002de9f1e6796f0f240d601b1"
