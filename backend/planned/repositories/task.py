@@ -1,4 +1,4 @@
-from planned.objects.routine import Task
+from planned.objects import Task
 
 from .base import BaseRepository
 
