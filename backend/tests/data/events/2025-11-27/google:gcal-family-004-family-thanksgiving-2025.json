@@ -1,7 +1,7 @@
 {
   "name": "Sifleet Family Thanksgiving",
-  "calendar_id": "family-thanksgiving-2025",
-  "platform_id": "gcal-family-004",
+  "platform_id": "family-thanksgiving-2025",
+  "calendar_id": "gcal-family-004",
   "platform": "google_calendar",
   "status": "confirmed",
   "starts_at": "2025-11-27T16:30:00Z",
