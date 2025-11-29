@@ -1,3 +1,4 @@
+import equals
 import pytest
 
 from planned.utils.dates import get_current_date
@@ -19,5 +20,6 @@ async def test_get_today(test_client, test_date):
             "updated_at": "2025-11-05T11:15:00Z",
             "date": "2025-11-27",
             "guid": "google_calendar-gcal-family-004",
+            "id": equals.instance_of(str),
         }
     ]

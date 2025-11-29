@@ -2,6 +2,8 @@ from datetime import date, datetime, time
 from enum import Enum
 from typing import TYPE_CHECKING, Optional
 
+from pydantic import BaseModel
+
 from .base import BaseObject
 from .task import TaskSchedule, TaskType
 
@@ -32,7 +34,7 @@ class DayOfWeek(int, Enum):
     SUNDAY = 6
 
 
-class RoutineSchedule(BaseObject):
+class RoutineSchedule(BaseModel):
     frequency: Frequency
 
     weekdays: list[DayOfWeek] | None = None

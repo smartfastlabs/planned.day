@@ -1,9 +1,11 @@
+import uuid
 from typing import Any, Self
 
 import pydantic
 
 
 class BaseObject(pydantic.BaseModel):
+    id: str = pydantic.Field(default_factory=lambda: str(uuid.uuid4()))
     model_config = pydantic.ConfigDict(
         from_attributes=True,
         populate_by_name=True,
@@ -12,16 +14,3 @@ class BaseObject(pydantic.BaseModel):
 
     def clone(self, **kwargs: dict[str, Any]) -> Self:
         return self.model_copy(update=kwargs)
-
-    @property
-    def id(self) -> str:
-        if hasattr(self, "guid"):
-            return str(self.guid)
-        elif hasattr(self, "uuid"):
-            return str(self.uuid)
-        elif hasattr(self, "platform_id") and hasattr(self, "platform"):
-            return f"{self.platform}_{self.platform_id}"
-        elif hasattr(self, "email"):
-            return str(self.email)
-
-        raise AttributeError("No suitable ID attribute found.")

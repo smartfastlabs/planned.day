@@ -2,6 +2,8 @@ from datetime import date as dt_date, datetime, time
 from enum import Enum
 from typing import TYPE_CHECKING, Optional
 
+from pydantic import BaseModel
+
 from .base import BaseObject
 
 
@@ -33,7 +35,7 @@ class TaskDefinition(BaseObject):
     type: TaskType
 
 
-class TaskSchedule(BaseObject):
+class TaskSchedule(BaseModel):
     available_time: time | None = None
     start_time: time | None = None
     end_time: time | None = None
