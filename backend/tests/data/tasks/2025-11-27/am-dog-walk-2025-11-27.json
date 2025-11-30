@@ -1,0 +1,14 @@
+{
+    "id": "am-dog-walk-2025-11-27",
+    "date": "2025-11-27",
+    "status": "NOT_READY",
+    "task_definition": {
+        "id": "walk-dog",
+        "name": "AM Dog Walk",
+        "description": "Walk the dog before 9am.",
+        "type": "CHORE"
+    },
+    "completed_at": null,
+    "schedule": null,
+    "routine_id": "am-dog-walk"
+}
