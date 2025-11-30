@@ -33,6 +33,7 @@ config.autoAddCss = false;
 import { onMount } from "solid-js";
 import { NotificationProvider } from "./providers/notifications";
 import { TaskProvider } from "./providers/tasks";
+import SettingsButton from "./components/shared/settingsButton";
 
 export default function App() {
   onMount(() => {
@@ -100,19 +101,22 @@ export default function App() {
   };
 
   return (
-    <Router
-      root={(props) => (
-        <NotificationProvider>
-          <TaskProvider>
-            <MetaProvider>
-              <Title>Todd's Daily Planer</Title>
-              <Suspense>{props.children}</Suspense>
-            </MetaProvider>
-          </TaskProvider>
-        </NotificationProvider>
-      )}
-    >
-      <Route path="/" component={Home} />
-    </Router>
+    <>
+      <Router
+        root={(props) => (
+          <NotificationProvider>
+            <TaskProvider>
+              <MetaProvider>
+                <Title>Todd's Daily Planer</Title>
+                <Suspense>{props.children}</Suspense>
+              </MetaProvider>
+            </TaskProvider>
+          </NotificationProvider>
+        )}
+      >
+        <Route path="/" component={Home} />
+      </Router>
+      <SettingsButton onClick={enablePush} />
+    </>
   );
 }
